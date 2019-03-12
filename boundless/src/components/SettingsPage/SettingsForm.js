@@ -4,29 +4,32 @@ import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import * as actions from "../../actions/settingsActions";
 import Dropdown from "react-dropdown";
-import Select from 'react-select';
+import Select from "react-select";
+import firebase from "firebase/app"; //only importing the app cause that is all what we need
+import "firebase/firestore"; //The actual database
+import "firebase/auth"; //this is for authentication
 
 const courses = [
-  {value: "CSC108", label: "CSC108"},
-  {value: "CSC148", label: "CSC148"},
-  {value: "CSC207", label: "CSC207"},
-  {value: "CSC236", label: "CSC236"},
-  {value: "CSC209", label: "CSC209"},
-  {value: "CSC258", label: "CSC258"},
-  {value: "CSC263", label: "CSC263"}
+  { value: "CSC108", label: "CSC108" },
+  { value: "CSC148", label: "CSC148" },
+  { value: "CSC207", label: "CSC207" },
+  { value: "CSC236", label: "CSC236" },
+  { value: "CSC209", label: "CSC209" },
+  { value: "CSC258", label: "CSC258" },
+  { value: "CSC263", label: "CSC263" }
 ];
 
-export class SettingsForm extends Component {
-
+class SettingsForm extends Component {
   constructor(props) {
     super(props);
+    const c_user = firebase.auth().currentUser;
     this.state = {
-      firstName: "",
-      lastName: "",
-      year: "",
-      email: "",
-      University: "",
-      Program: "",
+      firstName: c_user.firstName,
+      lastName: c_user.lastName,
+      year: c_user.year,
+      email: c_user.email,
+      University: c_user.University,
+      Program: c_user.Program,
       mycourses: []
 
       //done: false
@@ -58,22 +61,27 @@ export class SettingsForm extends Component {
         */
   }
 
-  handleAdd = (e) => {
+  handleAdd = e => {
     console.log(e);
-    var newArray = this.state.mycourses;    
-    newArray.push(e.value);   
-    this.setState({mycourses: newArray});
+    var newArray = this.state.mycourses;
+    newArray.push(e.value);
+    this.setState({ mycourses: newArray });
     console.log(this.state);
-   }; 
+  };
 
-  handleDelete = (e) => {
+  handleDelete = e => {
     var newArray = this.state.mycourses;
     newArray.pop(newArray.indexOf(e.value));
-    this.setState({mycourses: newArray});
+    this.setState({ mycourses: newArray });
     console.log(this.state);
-  }
+  };
 
   render() {
+    console.log("HERE");
+    //console.log(firebase.auth.currentUser);
+    const newId = firebase.auth().currentUser.uid;
+    console.log(newId);
+
     return (
       <div className="row">
         <div className="container center">
@@ -157,23 +165,32 @@ export class SettingsForm extends Component {
           </form>
         </div>
         <div className="container col s4 right">
-        <Select
-          placeholder="Add a new course:"
-          value={this.state.type}
-          onChange={this.handleAdd}
-          options={courses}
-          /> 
-          <h3>Your courses: 
-          { this.state.mycourses.map((item) => (
-            <button>{item}</button>
-          ))}</h3>
+          <Select
+            placeholder="Add a new course:"
+            value={this.state.type}
+            onChange={this.handleAdd}
+            options={courses}
+          />
+          <h3>
+            Your courses:
+            {this.state.mycourses.map(item => (
+              <button>{item}</button>
+            ))}
+          </h3>
         </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+  };
+};
+
 export default connect(
-  null,
-  actions
+  mapStateToProps,
+  null
 )(SettingsForm);
