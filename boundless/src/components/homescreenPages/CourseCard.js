@@ -14,8 +14,8 @@ class CourseCard extends Component {
 
     let key = this.props.key;
 
-
-    let CSC108 = "http://www.quickmeme.com/img/73/73da3b2d80dea370c1312e3060fec6af4b9ce54fbb7306324d47e07c746aa9d5.jpg" + id "&w=318&h=180"
+    let imgSrc = "https://placeholdit.imgix.net/~text?txtsize=33&txt="+ id + "&w=318&h=180"
+    var CSC108 = "http://www.quickmeme.com/img/73/73da3b2d80dea370c1312e3060fec6af4b9ce54fbb7306324d47e07c746aa9d5.jpg" + id + "&w=318&h=180"
     let CSC148 = "http://www.vincentmaccio.com/csc373/memes.html" + id +"&w=318&h=180"
     let CSC207 = "https://i.redd.it/4jidpdnobtk21.jpg" + id +"&w=318&h=180"
     let CSC236 = "http://www.cs.toronto.edu/~ylzhang/csc236/memes/jasmeet-s-2.jpg" + id +"&w=318&h=180"
@@ -23,15 +23,13 @@ class CourseCard extends Component {
     let CSC258 = "http://www.cs.toronto.edu/~ylzhang/csc258/memes/ja-8.jpg" + id +"&w=318&h=180"
     let CSC263 = "http://i.imgur.com/sphDT6X.jpg"  + id +"&w=318&h=180"
 
+
     return (
       <div style={{margin: 25}}>
           <Card>
           {/* // pass the room ID that we clicked on to the chatroom route */}
-          <Link to={{ pathname: "/chatroom", state: {roomID: id}}} >
-
-            <CardImg top width="100%" src=
-
-
+          <Link to={{ pathname: "/chatroom", state: {roomID: id}}} >  
+            <CardImg top width="100%" src="http://www.quickmeme.com/img/73/73da3b2d80dea370c1312e3060fec6af4b9ce54fbb7306324d47e07c746aa9d5.jpg" //src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
             alt="Card image cap" />
           </Link>
           <CardBlock>
