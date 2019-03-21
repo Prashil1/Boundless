@@ -54,13 +54,13 @@ class Messages extends React.Component {
     //    const messages = map[0].message
        
         return (
-            <div style={{width: "80%", background: "#eeee",}}> 
+            <div style={{width: "80%", background: "#eeee"}}> 
             
                 <React.Fragment>
 
                     <ChatHeader roomID={this.props.roomName}/>
   
-                     <Segment style={{display: "flex", height: "75%", margin: 5}} >
+                     <Segment style={{display: "flex", height: "75%", margin: 5, overflowY: "scroll"}} >
                          <Comment.Group className="messages">
                             
                             {msgList.map((item, i) => (
