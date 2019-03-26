@@ -7,6 +7,8 @@ const settingsReducer = (state = initState, action) => {
     case "update_settings":
       console.log("updating settings");
       return { ...state, settings: action.payload };
+    case "report_user":
+      console.log("reported user");
 
     default:
       return state;

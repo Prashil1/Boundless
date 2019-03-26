@@ -8,7 +8,8 @@ export const UPDATE_SETTINGS = "update_settings";
 
 export const VALID_PROFILE_UPDATE = "valid_profile_update";
 export const INVALID_PROFILE_UPDATE = "invalid_profile_update";
-export const NEW_MESSAGE = 'new_message';
+export const NEW_MESSAGE = "new_message";
 export const UPDATE_LAST_SEEN = "updateLastSeen";
 export const SEARCH_MESSAGES = "search_messages";
-export const UPLOAD_IMGS = 'upload_imgs'
+export const UPLOAD_IMGS = "upload_imgs";
+export const REPORT_USER = "report_user";
