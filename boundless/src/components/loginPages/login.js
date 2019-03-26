@@ -33,37 +33,42 @@ class login extends Component {
 
     return (
       <div className="container-fluid col-md-4 offset-md-4">
+        
+        <div style={{alignContent: 'center'}} >
+          <img className="materialboxed" width="50%" src={require('../../BoundlessLogo.png')} />
+        </div>
+
         <div className="card">
-        <div className="grey-text text-darken-3 card-header">Sign In</div>
-        <form className="white card-body" onSubmit={this.handleSubmit}>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input onChange={this.handleChange} type="text" id="email" />
-          </div>
-
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input onChange={this.handleChange} type="password" id="password" />
-          </div>
-
-          <div className="row center">
-            <div className="input-field col">
-              <input
-                className="btn blue lighten-1 z-depth-0"
-                type="submit"
-                value="Login"
-              />
+          <div className="grey-text text-darken-3 card-header">Sign In</div>
+          <form className="white card-body" onSubmit={this.handleSubmit}>
+            <div className="input-field">
+              <label htmlFor="email">Email</label>
+              <input onChange={this.handleChange} type="text" id="email" />
             </div>
 
-            <div className="input-field col">
-              <Link to="/register">
-                <button className="btn blue lighten-1 z-depth-0">
-                  Register
-                </button>
-              </Link>
+            <div className="input-field">
+              <label htmlFor="password">Password</label>
+              <input onChange={this.handleChange} type="password" id="password" />
             </div>
-          </div>
-        </form>
+
+            <div className="row center">
+              <div className="input-field col">
+                <input
+                  className="btn blue lighten-1 z-depth-0"
+                  type="submit"
+                  value="Login"
+                />
+              </div>
+
+              <div className="input-field col">
+                <Link to="/register">
+                  <button className="btn blue lighten-1 z-depth-0">
+                    Register
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     );
