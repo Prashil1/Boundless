@@ -7,11 +7,12 @@ import Register from "./components/RegisterPages/Register";
 import Home from "./components/homescreenPages/HomeScreen";
 import Settings from "./components/SettingsPage/Settings";
 import Chatroom from "./components/chatroomPages/Chatroom";
+import Report from "./components/ReportUsers/Report";
 
 const bgimage = require("./white-waves.png");
 class App extends Component {
   render() {
-    document.getElementById('root').style.backgroundImage = `url(${bgimage})`
+    document.getElementById("root").style.backgroundImage = `url(${bgimage})`;
     return (
       <BrowserRouter>
         <div
@@ -24,6 +25,7 @@ class App extends Component {
             <Route exact path="/" component={login} />
             <Route path="/register" component={Register} />
             <Route path="/home" component={Home} />
+            <Route path="/report" component={Report} />
             <Route path="/settings" component={Settings} />
             <Route path="/chatroom" component={Chatroom} />
           </Switch>
