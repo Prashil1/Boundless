@@ -141,6 +141,13 @@ export class SettingsForm extends Component {
     console.log(this.state);
   }
 
+  handleUni(type,option){
+    const selected = option.value;
+    this.setState({[type]: selected});
+    
+    this.state.courses = [];
+    
+  }
   handleSelection(type, option) {
     const selected = option.value;
     this.setState({ [type]: selected });
@@ -229,7 +236,7 @@ export class SettingsForm extends Component {
                   placeholder={this.state.university || "Select your University"}
                   value={this.state.university}
                   name="university"
-                  onChange={this.handleSelection.bind(this,"university")}
+                  onChange={this.handleUni.bind(this,"university")}
                   options={university}
                 />
               </div>
