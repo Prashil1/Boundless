@@ -42,8 +42,42 @@ export function updateProfile(profileDetails) {
   };
 }
 
-export function reportUser(profileDetails) {
+export function reportUser(report) {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    dispatch({ type: types.REPORT_USER });
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+
+    var userID = firebase.auth().currentUser.uid;
+
+    console.log("userID: " + userID);
+
+    var docReference = firestore.collection("reports").doc("report");
+
+    docReference
+      .get()
+      .then(doc => {
+        console.log(doc.data());
+
+        var newReport = doc.data()["reports"];
+
+        newReport.push(report);
+
+        var final = {
+          reports: newReport
+        };
+
+        // docReference.update({ lastSeen: time });
+        docReference.set(final).then(() => {
+          console.log("Set complete");
+        });
+        // docReference.set(reports, { merge: true });
+        console.log("updated");
+        dispatch({ type: types.VALID_REPORT_USER });
+      })
+      .catch(error => {
+        console.log("here");
+
+        dispatch({ type: types.INVALID_REPORT_USER });
+      });
   };
 }

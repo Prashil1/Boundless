@@ -15,6 +15,7 @@ const reason = [
   { value: "Death Threats", label: "Death Threats" }
 ];
 
+/*
 var {
   firstName,
   lastName,
@@ -23,9 +24,9 @@ var {
   university,
   program,
   courses
-} = this.props.profile;
-
-const courses = { courses: this.state.courses };
+} 
+*/
+//const courses = { courses: this.state.courses };
 //comment
 class ReportForm extends Component {
   constructor(props) {
@@ -56,8 +57,20 @@ class ReportForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    this.props.reportUser(this.state);
+    const reportUserInfo = {
+      userName: this.state.userName,
+      chatroom: this.state.chatroom,
+      reason: this.state.reason,
+      comments: this.state.comments
+    };
+    this.props.reportUser(reportUserInfo);
     this.renderHome();
+    this.setState({
+      userName: "",
+      chatroom: "",
+      reason: "",
+      comments: ""
+    });
   }
 
   renderHome() {
@@ -91,12 +104,11 @@ class ReportForm extends Component {
           <div className="form-group">
             <label className="control-label">Course Chatroom</label>
             <input
-              onChange={this.handleSelection.bind(this, "courses")}
+              onChange={this.onChange}
               value={this.state.chatroom}
               type="text"
               name="chatroom"
               className="form-control"
-              options={courses}
             />
           </div>
 

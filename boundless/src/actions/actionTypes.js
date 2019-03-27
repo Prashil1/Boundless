@@ -12,4 +12,5 @@ export const NEW_MESSAGE = "new_message";
 export const UPDATE_LAST_SEEN = "updateLastSeen";
 export const SEARCH_MESSAGES = "search_messages";
 export const UPLOAD_IMGS = "upload_imgs";
-export const REPORT_USER = "report_user";
+export const VALID_REPORT_USER = "valid_report_user";
+export const INVALID_REPORT_USER = "invalid_report_user";
