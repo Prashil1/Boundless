@@ -38,9 +38,8 @@ class CourseCard extends Component {
               top
               width="100%"
               src={
-                "https://placeholdit.imgix.net/~text?txtsize=33&txt=" +
-                name +
-                "&w=318&h=180&bg=ffffff"
+                "https://dummyimage.com/320x180/ffffff/000000&text=" +
+                name
               }
               alt="Card image cap"
               onClick={() => this.props.setChat(id)}

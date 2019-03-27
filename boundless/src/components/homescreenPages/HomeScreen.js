@@ -55,6 +55,9 @@ class HomeScreen extends Component {
 
   getOnline(users) {
     var online = []
+    if (!users) {
+      return online;
+    }
     users.forEach(function(elem) {
       if (Date.now() - elem['lastSeen'] < 900000) {
         online.push(elem.firstName);
