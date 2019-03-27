@@ -86,9 +86,8 @@ const URyerson_courses = [
   { value: "5+", label: "5+" }
 ];
 const school = [
-  { value: "UToronto", label: "University of Toronto" },
-  { value: "URyerson", label: "Ryerson University" },
-  { value: "YorkU", label: "York University" }
+  { value: "University of Toronto", label: "University of Toronto" },
+  { value: "Ryerson University", label: "Ryerson University" },
 ];
 
 const programs = [
@@ -304,7 +303,7 @@ class RegisterForm extends Component {
           </div>
 
           <div className="col-md-6">
-            { this.state.university == "UToronto"  ? 
+            { this.state.university == "University of Toronto"  ? 
               <Select
               placeholder="Add a course:"
               value={this.state.type}
