@@ -13,9 +13,6 @@ const SignedInLinks = props => {
         <NavLink to="/settings">Settings</NavLink>
       </li>
       <li>
-        <NavLink to="/biography">Bio</NavLink>
-      </li>
-      <li>
         <NavLink to="/report">Report User</NavLink>
       </li>
       <li>
