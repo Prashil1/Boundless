@@ -135,7 +135,7 @@ class RegisterForm extends Component {
         <div className="row card-body">
           <div className="col-md-6">
             <form onSubmit={this.onSubmit}>
-            
+
               <div className="form-group">
                 <label className="control-label">First Name</label>
                 <input
@@ -279,25 +279,6 @@ class RegisterForm extends Component {
                   
 
              </div>
-
-
-            {/* <table>
-              {this.state.courses.map(option => (
-                <tr>
-                  <td>
-                    <div className="btn-group">
-                      <button className="btn btn-success">{option}</button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={this.handleDelete.bind(this, option)}
-                      >
-                        <FontAwesomeIcon icon="trash" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </table> */}
             
           </div>
         </div>
