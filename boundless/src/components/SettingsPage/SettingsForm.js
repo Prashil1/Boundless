@@ -181,11 +181,12 @@ export class SettingsForm extends Component {
 
   handleAddCourse = option => {
     var updatedCourses = this.state.courses;
-    
-    if (updatedCourses.indexOf(option.value) == -1) {
-      updatedCourses.push(option.value);
-      this.setState({ courses: updatedCourses });
-    } 
+    if (updatedCourses.length < 6) {
+      if (updatedCourses.indexOf(option.value) == -1) {
+        updatedCourses.push(option.value);
+        this.setState({ courses: updatedCourses });
+      } 
+    }
     console.log(this.state);
   };
 

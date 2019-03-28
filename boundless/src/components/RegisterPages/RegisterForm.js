@@ -98,6 +98,7 @@ class RegisterForm extends Component {
 
   handleAddCourse = option => {
     var updatedCourses = this.state.courses;
+
     if(updatedCourses.length < 6){
       if (updatedCourses.indexOf(option.value) == -1) {
         updatedCourses.push(option.value);
@@ -108,6 +109,7 @@ class RegisterForm extends Component {
         courseOverFlow: true
       })
     }
+
 
     console.log(this.state);
   };
