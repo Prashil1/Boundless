@@ -7,9 +7,11 @@ export function newMessage (roomName, msg) {
 
         const msgs = db.collection('messages').doc(roomName)
         msgs.get().then(function(doc){
-            var existing = doc.data()['messages']
-            console.log({existing});
-            
+            var existing = []
+            if (doc.exists){
+              existing = doc.data()['messages']
+              console.log({existing});
+            }
             //msg,user, postedAt
             var newMessage = {
               msg: msg.message,
