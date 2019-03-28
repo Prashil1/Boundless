@@ -43,7 +43,7 @@ class CourseCard extends Component {
                 "&w=318&h=180&bg=ffffff"
               }
               alt="Card image cap"
-              onClick={() => this.props.setChat(id)}
+              onClick={() => this.props.setChat(id, name)}
             />
           </Link>
           <Link

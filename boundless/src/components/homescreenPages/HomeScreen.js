@@ -12,27 +12,89 @@ import ColorPanel from "../chatroomPages/ColorPanel/ColorPanel";
 import "../../index.css";
 import { updateLastSeen } from "../../actions/chatActions";
 
+import firebase from 'firebase'
+
 //comment
 class HomeScreen extends Component {
-  state = {
-    courseList: null,
-    curChat: 0
-  };
+
 
   constructor(props) {
     super(props);
     this.removeCourse = this.removeCourse.bind(this);
+
+    this.state = {
+      courseList: null,
+  
+  
+      currChatIndex: 0,
+  
+      
+    };
+
   }
 
-  setChat(roomID) {
-    this.setState({ curChat: roomID }, function() {
-      console.log("Switching to", this.state.curChat);
+  setChat(roomIndex, roomID) {
+
+    this.setState(  { 
+      currChatIndex: roomIndex,
+      currChatID: roomID,
+    
+    }, () => {
+
+      const id = this.state.currChatID;
+      var db = firebase.firestore();
+      const userID = this.props.auth.uid;
+  
+      var chatroom = db.collection("messages").doc(id);
+      var user = db.collection("users").doc(userID)
+      var name;
+
+      user.get().then( (doc) => {
+
+        name = doc.data()['firstName']
+      })
+  
+      chatroom.get().then(function(doc){
+  
+        var userList= doc.data()['userList']
+  
+        console.log('userList (setChat): ' + userList)
+
+        if(!userList) {
+          chatroom.update({userList: []});
+
+        } else {
+
+          if(!userList.includes(name)) {
+            userList.push(name);
+          } else {
+            var userIndex = userList.indexOf(name);
+
+            userList.splice(userIndex, 1);
+          }
+
+          const newUserList = userList;
+          chatroom.update({userList: newUserList});
+
+
+        }
+        
+        // chatroom.update({userList: currChatID})
+      })
+      // console.log("Switching to " + this.state.currChatIndex + ' ' + this.state.currChatID);
     });
+
+
+
+
   }
   componentDidMount() {
     document.body.style.height = "100%";
     document.getElementById("root").style.height = "100%";
     document.getElementsByClassName("App")[0].style.height = "100%";
+
+
+
     //this.props.updateLastSeen(this.props.auth.uid);
   }
 
@@ -55,6 +117,11 @@ class HomeScreen extends Component {
 
   getOnline(users) {
     var online = []
+
+    // console.log('users: ' + JSON.stringify(users));
+
+    // console.log('chatroom: ' + JSON.stringify(this.props.chatroom))
+
     users.forEach(function(elem) {
       if (Date.now() - elem['lastSeen'] < 900000) {
         online.push(elem.firstName);
@@ -62,6 +129,17 @@ class HomeScreen extends Component {
     });
     return online;
   }
+
+  getUsersInCurrChat(currChatID) {
+
+    var userList = this.props.chatroom[0].userList;
+
+    console.log('userList (asdddssssd): ' + JSON.stringify(userList));
+
+    return userList;
+    
+  }
+
 
   renderCourseCards(courseList, numPerRow) {
     
@@ -100,7 +178,14 @@ class HomeScreen extends Component {
       return <Redirect to="/" />;
     }
     var { courses } = this.props.profile;
+
+
+
     if (courses == undefined) return <div />;
+
+    
+
+
     
     if (!courses.includes("room1")) {
       courses.unshift("room1");
@@ -110,6 +195,19 @@ class HomeScreen extends Component {
       this.props.updateLastSeen(this.props.auth.uid);
       online = this.getOnline(this.props.users);
     }
+    var usersInCurrChat = [];
+
+    var result = this.getUsersInCurrChat()
+
+    if(result) {
+      usersInCurrChat = result;
+    }
+
+
+
+    console.log('usersCurrChat (render) ' + usersInCurrChat)
+
+
     
     return (
       // <Container fluid>
@@ -139,16 +237,16 @@ class HomeScreen extends Component {
             }}
           >
             <Messages
-              key={courses[this.state.curChat]}
+              key={courses[this.state.currChatIndex]}
               user={this.props.profile}
-              roomID={courses[this.state.curChat]}
-              roomName={courses[this.state.curChat]}
+              roomID={courses[this.state.currChatIndex]}
+              roomName={courses[this.state.currChatIndex]}
             />
           </div>
 
 
           <div className="card col-md-2" style={{ width: "100%" }}>
-            <MetaPanel online={online}/>
+            <MetaPanel online={usersInCurrChat}/>
           </div>
         </div>
       </div>
@@ -160,7 +258,11 @@ const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+
+    chatroom: state.firestore.ordered.messages,
+
+    ordered: state.firestore,
   };
 };
 
@@ -170,6 +272,7 @@ connect(
   {...actions, updateLastSeen},
 ),
   firestoreConnect((props) =>  [
-    `users`
+    `users`,
+    `messages`
   ])
 )(HomeScreen);
