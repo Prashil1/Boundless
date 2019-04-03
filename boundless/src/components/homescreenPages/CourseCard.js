@@ -20,10 +20,8 @@ class CourseCard extends Component {
     super(props);
   }
   render() {
-    let { id, name, } = this.props.course;
-    let oldIndex = this.props.oldIndex
-    // // console.log(this.props.course, '99999999');
-    // console.log({id});
+    let { id, name } = this.props.course;
+    // console.log(this.props.course, '99999999');
     
     let imgSrc =
       "https://placeholdit.imgix.net/~text?txtsize=33&txt=" +
@@ -44,7 +42,7 @@ class CourseCard extends Component {
                 name
               }
               alt="Card image cap"
-              onClick={() => this.props.setChat(id, oldIndex)}
+              onClick={() => this.props.setChat(id)}
             />
           </Link>
           <Link

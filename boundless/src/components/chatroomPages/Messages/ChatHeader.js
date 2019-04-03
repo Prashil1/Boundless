@@ -15,19 +15,11 @@ class ChatHeader extends React.Component {
     handleChange = (e) => {
         this.setState({
             searchText: e.target.value
-        }, () => { this.handleSearch() }
-        )
-
+        })
         
     }
 
     handleSearch = () => {
-
-        console.log('searchText: ' + this.state.searchText)
-
-        // if(this.state.searchText === '') {
-        //     return;
-        // }
 
         const msgs = this.props.messages
         var msgFilter = []
@@ -44,7 +36,7 @@ class ChatHeader extends React.Component {
     }
 
     render() {
-        
+	    console.log("RoomID", this.props.roomID)
         return (
 
 

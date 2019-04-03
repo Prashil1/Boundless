@@ -5,12 +5,8 @@ const initState = {
 const loginReducer = (state = initState, action) => {
   switch (action.type) {
     case "invalid_login":
-      // console.log("Login Error");
-
-
-      console.log(JSON.stringify(state))
-      
-      return { ...state, error: "Invalid email or password" };
+      console.log("Login Error");
+      return { ...state, error: "Login Failed" };
 
     case "valid_login":
       console.log("Login Success");
