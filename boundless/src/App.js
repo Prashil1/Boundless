@@ -7,6 +7,7 @@ import Home from "./components/homescreenPages/HomeScreen";
 import Settings from "./components/SettingsPage/Settings";
 import Chatroom from "./components/chatroomPages/Chatroom";
 import Report from "./components/ReportUsers/Report";
+import MeetingPage from "./components/MeetingPages/MeetingPage";
 
 const bgimage = require("./white-waves.png");
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/report" component={Report} />
             <Route path="/settings" component={Settings} />
             <Route path="/chatroom" component={Chatroom} />
+            <Route path='/meeting' component={MeetingPage} />
           </Switch>
         </div>
       </BrowserRouter>

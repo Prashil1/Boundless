@@ -52,7 +52,7 @@ class ChatHeader extends React.Component {
                 <Form onSubmit={this.handleSearch}>
                     <Input 
                         onChange={this.handleChange}
-                        action='Search' 
+                         
                         placeholder='Search...' />
                 </Form>
                 
