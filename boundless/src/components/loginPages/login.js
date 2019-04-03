@@ -4,14 +4,12 @@ import { authenticateLogin } from "../../actions/loginActions";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import loginReducer from "../../reducers/loginReducer";
 
 class login extends Component {
   //initial State
   state = {
     email: "",
-    password: "",
-    error: "",
+    password: ""
   };
 
   handleChange = e => {
@@ -25,52 +23,15 @@ class login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("in handle submit");
+    // console.log("in handle submit");
 
     this.props.authenticateLogin(this.state);
-
-    const error = this.props.login.error;
-
-    // console.log('error: ' + error);
-
-    if(error != null) {
-      // console.log(error)
-
-
-      this.setState(prevState => ({
-
-        ...prevState,
-        error: error
-
-      }, () => {console.log('new error: ' + this.state.error)}
-      
-      ));
-        
-        
-    }
-
-    
-
   };
-
-  componentWillReceiveProps(props) {
-
-    // handle login error
-
-    const error = props.login.error;
-    this.setState(prevState => ({
-      ...prevState,
-      error: error
-
-    }));
-    // console.log('new props: ' + JSON.stringify(props));
-  }
 
   render() {
     if (this.props.auth.uid) {
       return <Redirect to="/home" />;
     }
-    
 
     return (
       <div className="container-fluid col-md-4 offset-md-4">
@@ -89,14 +50,9 @@ class login extends Component {
                 type="password"
                 id="password"
               />
-
-              <p style={{position: 'absolute', display: 'flex', color: 'red'}}>
-                {this.state.error}
-              </p>
-
             </div>
 
-            <div style={{position: 'relative', top: '6%'}}className="row center">
+            <div className="row center">
               <div className="input-field col">
                 <input
                   className="btn blue lighten-1 z-depth-0"
@@ -131,8 +87,7 @@ class login extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
-    profile: state.firebase.profile,
-    login:  state.loginReducer
+    profile: state.firebase.profile
   };
 };
 
