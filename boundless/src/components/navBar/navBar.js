@@ -10,7 +10,7 @@ import {BrowserView,} from "react-device-detect";
 const NavBar = (props) => {
   // console.log(props.profile);
   return (
-    <nav className="nav-wrapper grey darken-3">
+    <nav className=" sidenav-trigger nav-wrapper grey darken-3">
       <div className="container">
         <BrowserView><Link to="/" className="brand-logo center">
             Boundless
