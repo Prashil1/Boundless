@@ -38,7 +38,8 @@ class CourseCard extends Component {
               top
               width="100%"
               src={
-                "https://dummyimage.com/320x180/ffffff/000000&text=" +
+                "https://via.placeholder.com/320x180/FFFFFFF/?text=" +
+                
                 name
               }
               alt="Card image cap"
