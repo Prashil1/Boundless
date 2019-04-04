@@ -26,7 +26,7 @@ const SignedInLinks = props => {
       </li>
       
       <li>
-        <a onClick={props.signOut}>Log Out</a>
+        <a onClick={props.signOut} href="/">Log Out</a>
       </li>
     </ul>
     </BrowserView>
@@ -39,7 +39,7 @@ const SignedInLinks = props => {
         <DropdownItem><NavLink style={{color: "black"}} to="/settings">Settings</NavLink></DropdownItem>
         <DropdownItem><NavLink style={{color: "black"}} to="/report">Report User</NavLink></DropdownItem>
         <DropdownItem><NavLink style={{color: "black"}} to="/meeting">Set Meeting</NavLink></DropdownItem>
-        <DropdownItem><a onClick={props.signOut}>Log Out</a></DropdownItem>
+        <DropdownItem><a onClick={props.signOut} style={{color: "black"}} href="/">Log Out</a></DropdownItem>
         </DropdownMenu>
     </UncontrolledDropdown>
     

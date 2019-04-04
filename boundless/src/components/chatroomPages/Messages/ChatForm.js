@@ -87,8 +87,8 @@ class ChatForm extends React.Component {
             
             <Segment className="chatForm">
 
-            <label forHtml="file-input" style={{margin: "0"}}>
-                <img style={{width:"100px"}}src="https://goo.gl/pB9rpQ" />
+            <label htmlFor="file-input" style={{margin: "0"}}>
+                <img style={{width:"100px"}} src="https://goo.gl/pB9rpQ" />
             </label>
                 <input
                     style={{ width: "15%", margin: '0.5em', padding: '0.5em', display: "none"}} 
