@@ -25,10 +25,8 @@ export function newMessage (roomName, msg) {
               messages: existing
             }
             
-            
             msgs.set(newData).then(function(){
               console.log("newMessage added");
-              
             })
         })
       dispatch({ type: types.NEW_MESSAGE, payload: msg})

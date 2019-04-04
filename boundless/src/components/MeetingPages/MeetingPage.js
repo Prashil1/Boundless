@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import {connect } from 'react-redux'
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import * as actions from '../../actions/settingsActions'
 
 class MeetingPage extends Component {
 
   state = {
     userEmail: '',
     time: '',
-    place: ''
+    place: '',
+    user: ''
   }
 
   handleChange = (e) => {
@@ -15,21 +19,46 @@ class MeetingPage extends Component {
     })
   }
 
+
   handleSubmit = (e) => {
     e.preventDefault()
+    
+    var info = this.state
+    info.user = this.props.profile.email
+
     this.setState({
       userEmail: '',
       time: '',
       place: ''
     })
-    
+
+    this.props.createNewMeeting(info)
   }
 
+  handleMeeting = (e) => {
+    console.log(e.target.name);
+    //here name == index
+    this.props.acceptRequest(e.target.name)
+  }
+/*
+
+presonRequested --> person that the user want to meet up with
+requester   --> person that is requesting
+
+0 --> if 0 and requester == user ==> users has asked is waiting for a response
+1 --> if 1 and requester != user ==> user has been asked for a response (send response)
+2 --> if 2 --> both parties have accepted
+
+*/
 
 
 
   render() {
-    console.log(this.state);
+
+    if (this.props.meetings == null){
+      return <div />
+    }
+    
     
     return (
       <div className="container">
@@ -43,22 +72,40 @@ class MeetingPage extends Component {
                     <th>Meeting Requester</th>
                     <th>Time</th>
                     <th>Place</th>
+                    <th>Status</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Alvin</td>
-                  <td>Eclair</td>
-                  <td>$0.87</td>
-                </tr>
+                {this.props.meetings[0].requestedMeetings.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item.personRequested}</td>
+                      <td>{item.time}</td>
+                      <td>{item.place}</td>
+                      <td>
+                          <button
+                            onClick={this.handleMeeting}
+                            name={index}
+                            disabled={(item.status != 1)}
+                            className="waves-effect light-green accent-3 btn-small">
+                            {item.status==0? 'Waiting' : (item.status == 1? 'Accept' : 'Meeting Set')
+                          }
+                            
+
+                          </button>
+                      </td> 
+                    </tr>
+                  )
+                })}
+
               </tbody>
             </table>
           </div>
           
           <div className="card-panel">
             <h2>Set Meeting</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <input onChange={this.handleChange} type="text" id="userEmail" placeholder="Email of User" name="userEmail" />
               <input onChange={this.handleChange}  type="date" id="time" name="time" />
               <input onChange={this.handleChange}  type="text" id="place" name="place" placeholder="Meeting Place" />
@@ -78,7 +125,20 @@ class MeetingPage extends Component {
   }
 }
 
-export default MeetingPage
+const mapStateToProps = state => {
+  return {
+    meetings: state.firestore.ordered.meetings,
+    profile: state.firebase.profile,
+    auth: state.firebase.auth,
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, actions),
+  firestoreConnect((props) =>  [
+    `meetings/meetings`
+  ])
+)(MeetingPage);
 
 
 
