@@ -14,3 +14,5 @@ export const SEARCH_MESSAGES = "search_messages";
 export const UPLOAD_IMGS = "upload_imgs";
 export const VALID_REPORT_USER = "valid_report_user";
 export const INVALID_REPORT_USER = "invalid_report_user";
+export const MEETING_ADDED_SUCCESS = "meeting_added_success";
+export const ACCEPT_MEETING_SUCCESS = 'accept_meeting_success'

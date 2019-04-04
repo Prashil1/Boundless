@@ -34,9 +34,6 @@ export function updateProfile(profileDetails) {
       })
       .catch(error => {
         console.log("here");
-
-        // console.log(error.toString())
-
         dispatch({ type: types.INVALID_PROFILE_UPDATE, payload: error });
       });
   };
@@ -81,3 +78,85 @@ export function reportUser(report) {
       });
   };
 }
+
+export function createNewMeeting(meetingInfo) {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    var firestore = getFirestore()
+    
+    var doc = firestore.collection('meetings').doc('meetings')
+    
+    doc.get().then(function(doc){
+      
+      var meetings = doc.data()['requestedMeetings']
+      
+      console.log(meetings);
+      
+      const data = {
+          status: false,
+          time: meetingInfo.time,
+          place: meetingInfo.place,
+          personRequested: meetingInfo.userEmail,
+          requester: meetingInfo.user
+      }
+      meetings.push(data)
+      
+      const final = {
+        requestedMeetings: meetings
+      }
+
+      firestore.collection('meetings').doc('meetings').set(final).then(() => {
+        console.log('new thing added');
+        dispatch({ type: types.MEETING_ADDED_SUCCESS });
+
+      })
+
+    })
+    .catch(error => {
+      console.log("here");
+      console.log(error);
+      
+      dispatch({ type: types.INVALID_PROFILE_UPDATE, payload: error });
+    });
+
+
+  }
+}
+
+export function acceptRequest(index) {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    var firestore = getFirestore()
+    
+    var doc = firestore.collection('meetings').doc('meetings')
+    
+    doc.get().then(function(doc){
+
+      var meetings = doc.data()['requestedMeetings']
+      var data = meetings[index]
+      data.status = 2
+      
+      meetings.splice(index, 1, data)
+      
+      const final = {
+        requestedMeetings: meetings
+      }
+
+      firestore.collection('meetings').doc('meetings').set(final).then(() => {
+        console.log('changed status');
+        dispatch({ type: types.ACCEPT_MEETING_SUCCESS });
+
+      })
+
+    })
+    .catch(error => {
+      console.log("here");
+      console.log(error);
+      
+      dispatch({ type: types.INVALID_PROFILE_UPDATE, payload: error });
+    });
+
+
+  }
+}
+
+
+
