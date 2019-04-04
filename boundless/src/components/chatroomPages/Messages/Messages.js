@@ -74,7 +74,7 @@ class Messages extends React.Component {
 
     const { user } = this.props;
     return (
-      <div style={{ height: "100%", background: "#eeee" }}>
+      <div style={{ height: "100%", background: "#eeee", display: "flex", flexDirection: "column" }}>
         <React.Fragment>
 
           <ChatHeader messages={msgList}  roomID={this.props.roomName} />
@@ -82,7 +82,7 @@ class Messages extends React.Component {
           <Segment
             style={{
               display: "flex",
-              height: "68%",
+              height: "100%",
               overflowY: "scroll",
               overflowX: "hidden",
             }}

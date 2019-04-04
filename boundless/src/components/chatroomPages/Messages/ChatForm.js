@@ -85,9 +85,9 @@ class ChatForm extends React.Component {
         const {search} = this.props
         return (
             
-            <Segment className="chatForm" style={{display: "flex", flexDirection: "row", margin: 5}}>
+            <Segment className="chatForm">
 
-            <label for="file-input" style={{margin: "0"}}>
+            <label forHtml="file-input" style={{margin: "0"}}>
                 <img style={{width:"100px"}}src="https://goo.gl/pB9rpQ" />
             </label>
                 <input
@@ -97,7 +97,7 @@ class ChatForm extends React.Component {
                     id="file-input"
                     onChange={this.handleFileUpload}
                     />
-                <div class="input-group">
+                <div className="input-group">
                 <Input
                     fluid
                     name="chatMessage"

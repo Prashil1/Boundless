@@ -11,6 +11,7 @@ import MetaPanel from "../chatroomPages/MetaPanel/MetaPanel";
 import ColorPanel from "../chatroomPages/ColorPanel/ColorPanel";
 import "../../index.css";
 import { updateLastSeen } from "../../actions/chatActions";
+import {BrowserView, MobileView, isMobile, CustomView} from "react-device-detect";
 
 //comment
 class HomeScreen extends Component {
@@ -116,7 +117,7 @@ class HomeScreen extends Component {
     
     return (
       // <Container fluid>
-      <div className="container-fluid" style={{ height: "90%" }}>
+      <div className="container-fluid" style={{ height: "100%" }}>
         <div className="row" style={{ height: "100%" }}>
           <div
             className="col-md-2 card"
@@ -131,7 +132,7 @@ class HomeScreen extends Component {
           >
             {this.renderCourseCards(courses, 3)}
           </div>
-
+          <div className="clearfix visible-sm"></div>
           <div
             className="col-md-8 card"
             style={{
@@ -148,9 +149,8 @@ class HomeScreen extends Component {
               roomName={courses[this.state.curChat]}
             />
           </div>
-
-
-          <div className="card col-md-2" style={{ width: "100%" }}>
+          <div className="clearfix visible-sm"></div>
+          <div className="clearfix card col-md-2" style={{ width: "100%" }}>
             <MetaPanel online={online}/>
           </div>
         </div>

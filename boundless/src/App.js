@@ -12,12 +12,14 @@ import MeetingPage from "./components/MeetingPages/MeetingPage";
 const bgimage = require("./white-waves.png");
 class App extends Component {
   render() {
-    document.getElementById("root").style.backgroundImage = `url(${bgimage})`;
+    document.getElementsByTagName("html")[0].style.backgroundImage = `url(${bgimage})`;
+    document.getElementsByTagName("html")[0].style.backgroundSize = "cover";
+    document.getElementsByTagName("html")[0].style.height = "100%";
     return (
       <BrowserRouter>
         <div
           className="App"
-          style={{ maxHeight: "inherit", backgroundImage: `url(${bgimage})` }}
+          style={{ maxHeight: "inherit", backgroundImage: `url(${bgimage})`}}
         >
           <NavBar />
           <Switch>

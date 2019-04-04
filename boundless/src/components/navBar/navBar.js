@@ -5,7 +5,7 @@ import * as actions from "../../actions/loginActions";
 import SignedInLinks from './signedInLinks';
 import SignedOutLinks from './signedOutLinks';
 import { updateLastSeen } from "../../actions/chatActions";
-import {BrowserView,} from "react-device-detect";
+import {BrowserView, MobileView} from "react-device-detect";
 
 const NavBar = (props) => {
   // console.log(props.profile);
@@ -15,9 +15,13 @@ const NavBar = (props) => {
         <BrowserView><Link to="/" className="brand-logo center">
             Boundless
           </Link>
-        </BrowserView>
+
           {props.auth.uid ? (<SignedInLinks />) : (<SignedOutLinks/>)}
         <Link to="/home" className="left">{props.profile.firstName}</Link>
+        </BrowserView>
+        <MobileView>
+        {props.auth.uid ? (<SignedInLinks />) : (<SignedOutLinks/>)}
+        </MobileView>
       </div>
     </nav>
   );
