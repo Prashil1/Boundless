@@ -80,6 +80,15 @@ requester   --> person that is requesting
               <tbody>
                 {this.props.meetings[0].requestedMeetings.map((item, index) => {
                   if ((item.personRequested == email || item.requester == email)){
+                    var check = 2
+                    if (item.status == 2){
+                      check = 2
+                    }else if (email == item.personRequested){
+                      //user need to accept
+                      check = 1
+                    }else if (email == item.requester) {
+                      check = 0
+                    }
                     return (
                       
                       <tr key={index}>
@@ -90,9 +99,9 @@ requester   --> person that is requesting
                             <button
                               onClick={this.handleMeeting}
                               name={index}
-                              disabled={(item.status != 1)}
+                              disabled={(check == 0 || check == 2)}
                               className="waves-effect light-green accent-3 btn-small">
-                              {item.status==0? 'Waiting' : (item.status == 1? 'Accept' : 'Meeting Set')
+                              {check == 0? 'Waiting' : (check == 1? 'Accept' : 'Meeting Set')
                             }
                               
 
