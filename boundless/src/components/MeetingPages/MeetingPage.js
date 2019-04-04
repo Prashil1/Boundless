@@ -59,6 +59,7 @@ requester   --> person that is requesting
       return <div />
     }
     
+    const { email } = this.props.profile
     
     return (
       <div className="container">
@@ -78,25 +79,28 @@ requester   --> person that is requesting
 
               <tbody>
                 {this.props.meetings[0].requestedMeetings.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{item.personRequested}</td>
-                      <td>{item.time}</td>
-                      <td>{item.place}</td>
-                      <td>
-                          <button
-                            onClick={this.handleMeeting}
-                            name={index}
-                            disabled={(item.status != 1)}
-                            className="waves-effect light-green accent-3 btn-small">
-                            {item.status==0? 'Waiting' : (item.status == 1? 'Accept' : 'Meeting Set')
-                          }
-                            
+                  if ((item.personRequested == email || item.requester == email)){
+                    return (
+                      
+                      <tr key={index}>
+                        <td>{item.personRequested}</td>
+                        <td>{item.time}</td>
+                        <td>{item.place}</td>
+                        <td>
+                            <button
+                              onClick={this.handleMeeting}
+                              name={index}
+                              disabled={(item.status != 1)}
+                              className="waves-effect light-green accent-3 btn-small">
+                              {item.status==0? 'Waiting' : (item.status == 1? 'Accept' : 'Meeting Set')
+                            }
+                              
 
-                          </button>
-                      </td> 
-                    </tr>
-                  )
+                            </button>
+                        </td> 
+                      </tr>
+                    )
+                  }
                 })}
 
               </tbody>
