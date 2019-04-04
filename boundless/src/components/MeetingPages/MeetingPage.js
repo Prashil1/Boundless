@@ -81,13 +81,13 @@ requester   --> person that is requesting
                 {this.props.meetings[0].requestedMeetings.map((item, index) => {
                   if ((item.personRequested == email || item.requester == email)){
                     var check = 2
-                    if (email == item.personRequested){
+                    if (item.status == 2){
+                      check = 2
+                    }else if (email == item.personRequested){
                       //user need to accept
                       check = 1
                     }else if (email == item.requester) {
                       check = 0
-                    }else if (item.status == 2){
-                      check = 2
                     }
                     return (
                       
